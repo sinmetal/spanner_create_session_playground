@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ssheater-node
+  name: ssheater-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssheater-node
+  template:
+    metadata:
+      labels:
+        app: ssheater-node
+    spec:
+      containers:
+        - image: gcr.io/$PROJECT_ID/sinmetal/ssheater/feature/id/22:60605d1308ff8d193b05aa14e3521319e72414af
+          name: ssheater-node
+          envFrom:
+            - configMapRef:
+                name: ssheater-config
